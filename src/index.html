@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="advanced">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FilmViewer</title>
+  </head>
+  <body>
+    <div class="layout">
+      <!-- Cabecera -->
+      <header>
+        <div class="logo"><div class="play"></div></div>
+        <h1>FilmViewer 2</h1>
+      </header>
+      <!-- Menú -->
+      <nav>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Peliculas</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </nav>
+      <!-- Contenido -->
+      <section class="content films">
+        <div id="list-films" class="content-area"></div>
+      </section>
+      <!-- Barra Lateral -->
+      <aside>
+        <!-- Buscador -->
+        <div class="x-search">
+          <h3>Buscador</h3>
+          <form id="x-search" action="">
+            <label for="search">
+              <p>Busca tu película</p>
+              <input type="text" id="search" name="search" />
+            </label>
+          </form>
+        </div>
+        <!-- Añadir película -->
+        <div class="x-add">
+          <h3>Añadir película</h3>
+          <form id="x-add" action="">
+            <label for="title">
+              <p>Título:</p>
+              <input type="text" id="title" name="title" />
+            </label>
+            <label for="year">
+              <p>Título:</p>
+              <input
+                type="number"
+                min="1900"
+                max="2025"
+                id="year"
+                name="year"
+              />
+            </label>
+            <label for="description">
+              <p>Descripción:</p>
+              <textarea id="description" name="description"></textarea>
+            </label>
+            <input type="submit" value="Guardar" />
+          </form>
+        </div>
+      </aside>
+      <footer>
+        &copy; Máster en Javascript y TypeScript - adriancerezo.es
+      </footer>
+    </div>
+  </body>
+</html>
