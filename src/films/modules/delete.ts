@@ -15,14 +15,12 @@ export default function (): void {
     const card: HTMLElement | null = document.getElementById(
       `film-item-${film.id}`
     );
-    card
-      ?.querySelector('button[class*="delete"]')
-      ?.addEventListener('click', () => {
-        const newFilms: Film[] = films.filter((f: Film) => f.id !== film.id);
-        console.log(newFilms);
-        storage.setFilms(newFilms);
-        list.updateList(newFilms);
-        list.show(true);
-      });
+    card?.querySelector('button.delete')?.addEventListener('click', () => {
+      const newFilms: Film[] = films.filter((f: Film) => f.id !== film.id);
+      console.log(newFilms);
+      storage.setFilms(newFilms);
+      list.updateList(newFilms);
+      list.show(true);
+    });
   });
 }

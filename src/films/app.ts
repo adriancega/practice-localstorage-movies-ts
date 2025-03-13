@@ -1,6 +1,7 @@
 import Add from './modules/add';
 import List from './modules/list';
 import Storage from './modules/storage';
+import Search from './modules/search';
 
 interface IApp {
   add: Add | null;
@@ -33,5 +34,7 @@ export default class App implements IApp {
     this.list.updateList(this.storage.getData());
     // Display items in the list
     this.list.show();
+    // Search functionality
+    Search();
   }
 }

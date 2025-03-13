@@ -12,6 +12,10 @@ body {
   margin: 0;
   padding: 0;
   background-color: rgb(var(--background-color));
+  /* background-image: url('../assets/noise.svg'); */
+  background-repeat: repeat;
+  /* background-size: 100px; */
+  /* mix-blend-mode: darken; */
 }
 
 html[data-theme='basic'] {
@@ -54,6 +58,28 @@ html[data-theme='advanced'] {
       'header header header header' 'nav nav nav nav'
       'lateral content content content' 'lateral footer footer footer';
     grid-template-rows: 60px 50px 1fr 40px;
+    grid-template-columns: 30% 25% 25% 20%;
+  }
+}
+
+html[data-theme='complex'] {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    padding: 0;
+  }
+
+  .layout {
+    /* GRID */
+    display: grid;
+    grid-template-areas:
+      'header nav nav nav'
+      'lateral content content content' 'footer footer footer footer';
+    grid-template-rows: 50px 1fr 40px;
     grid-template-columns: 30% 25% 25% 20%;
   }
 }
@@ -181,11 +207,12 @@ html[data-theme='advanced'] {
     gap: 1rem;
 
     .item {
+      position: relative;
       /* border: 1px solid rgb(var(--tertiary-color)); */
       /* background-color: rgba(var(--tertiary-color), 1); */
-      padding: 0.7em;
       border-radius: 1rem;
       box-shadow: 0 0 6px #ddd;
+      overflow: hidden;
       /* Flex */
       flex: 1 1 calc(33.333% - 1rem); /* Ajusta el ancho para que quepan tres por fila */
       box-sizing: border-box;
@@ -199,23 +226,48 @@ html[data-theme='advanced'] {
         flex: 1 1 calc(100% - 1rem); /* Ajusta el ancho para que quepan uno por fila */
       }
 
-      button {
-        background-color: rgb(var(--primary-color));
-        color: white;
-        border: none;
-        padding: 0.5em 1em;
-        border-radius: 0.5em;
-        cursor: pointer;
-        transition: background-color 0.2s;
+      .content {
+        padding: 0.7em;
+      }
 
-        &.edit {
-          background-color: rgb(var(--tertiary-color));
-          color: rgb(var(--text-color));
+      img {
+        width: calc(100% + 2rem);
+        margin-top: -1rem;
+        margin-right: -1rem;
+        margin-left: -1rem;
+        margin-bottom: 1rem;
+        object-fit: cover;
+        max-height: 200px;
+
+        @media screen and (max-width: 768px) {
+          max-height: 125px;
+        }
+      }
+
+      .actions {
+        &.hidden {
+          display: none;
         }
 
-        &:hover {
-          background-color: rgb(var(--secondary-color));
+        button {
+          background-color: rgb(var(--primary-color));
           color: white;
+          border: none;
+          padding: 0.5em 1em;
+          border-radius: 0.5em;
+          cursor: pointer;
+          transition: background-color 0.2s;
+
+          &.edit,
+          &.update {
+            background-color: rgb(var(--tertiary-color));
+            color: rgb(var(--text-color));
+          }
+
+          &:hover {
+            background-color: rgb(var(--secondary-color));
+            color: white;
+          }
         }
       }
     }
@@ -260,42 +312,86 @@ html[data-theme='advanced'] {
       mix-blend-mode: color-burn;
     }
   }
+}
 
-  form {
-    input[type='text'],
-    input[type='email'],
-    input[type='number'],
-    input[type='password'],
-    textarea {
-      width: 100%;
-      padding: 0.5em;
-      margin: 0.5em 0;
-      border: 1px solid #44362726;
-      border-radius: 0.5em;
+@keyframes showForm {
+  0% {
+    transform: translateY(110%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
 
-      &.error {
-        outline: 0 solid transparent;
-        border-color: red;
-      }
+@keyframes hideForm {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(110%);
+  }
+}
 
-      &:focus:not(.error) {
-        outline: 2px solid rgb(var(--primary-color));
-      }
+form {
+  input[type='text'],
+  input[type='email'],
+  input[type='number'],
+  input[type='password'],
+  textarea {
+    width: 100%;
+    padding: 0.5em;
+    margin: 0.5em 0;
+    border: 1px solid #44362726;
+    border-radius: 0.5em;
+
+    &.error {
+      outline: 0 solid transparent;
+      border-color: red;
     }
 
-    input[type='submit'] {
-      background-color: rgb(var(--primary-color));
-      color: white;
-      border: none;
-      padding: 0.5em 1em;
-      border-radius: 0.5em;
-      cursor: pointer;
-      transition: background-color 0.2s;
+    &:focus:not(.error) {
+      outline: 2px solid rgb(var(--primary-color));
+    }
+  }
 
-      &:hover {
-        background-color: rgb(var(--secondary-color));
-        color: white;
-      }
+  textarea {
+    height: 10rem;
+  }
+
+  &.edit-form {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(4px);
+    padding: 0.7rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    max-height: 100%;
+    overflow-y: auto;
+
+    /* Animation to show when is open */
+    &.show {
+      animation: showForm 0.5s forwards;
+    }
+
+    /* Animation to hide when is closed */
+    &.hidden {
+      animation: hideForm 0.5s forwards;
+    }
+  }
+
+  input[type='submit'] {
+    background-color: rgb(var(--primary-color));
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: rgb(var(--secondary-color));
+      color: white;
     }
   }
 }

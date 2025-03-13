@@ -1,5 +1,6 @@
 import { Film } from '../types/types';
-import Delete from './delete';
+import deleteFn from './delete';
+import editFn from './edit';
 
 interface IList {
   content: HTMLElement;
@@ -50,13 +51,20 @@ export default class List implements IList {
 
   filmTemplate(film: Film): string {
     return `
-      <article id="film-item-${film.id}" class="item">
-        <h3>${film.title} <span>(${film.year})</span></h3>
-        <div class="description">
-          ${this.transformPlainTextToParagraphs(film.description)}
+      <article id="film-item-${film.id}" class="item" data-id="${film.id}">
+        <div class="content">
+          <img src="https://placehold.co/450x300/999966/FFFFFF/jpg" alt="${
+            film.title
+          }" />
+          <h3>${film.title} <span>(${film.year})</span></h3>
+          <div class="description">
+            ${this.transformPlainTextToParagraphs(film.description)}
+          </div>
+          <div class="actions">
+            <button class="edit">Editar</button>
+            <button class="delete">Eliminar</button>
+          </div>
         </div>
-        <button class="/films/${film.id}/edit">Editar</button>
-        <button class="/films/${film.id}/delete">Eliminar</button>
       </article>
     `;
   }
@@ -67,12 +75,13 @@ export default class List implements IList {
   }
 
   show(resetContent: boolean = false) {
+    // Reset content if needed
     if (resetContent) {
       this.content.innerHTML = '';
     }
 
     this.films.forEach((film: Film) => this.addToList(film));
-    console.log('Showing films...');
-    Delete();
+    deleteFn();
+    editFn();
   }
 }
