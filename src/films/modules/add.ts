@@ -85,10 +85,10 @@ export default class Add implements IAdd {
     this.storage.addFilm(film);
 
     // Reset form
-    // const form = document.querySelector('form[id="x-add"]') as HTMLFormElement;
-    // if (form instanceof HTMLFormElement) {
-    //   form.reset();
-    // }
+    const form = document.querySelector('form[id="x-add"]') as HTMLFormElement;
+    if (form instanceof HTMLFormElement) {
+      form.reset();
+    }
 
     // Update the list
     this.list.updateList(this.storage.getData());
