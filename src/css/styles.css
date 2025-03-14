@@ -1,6 +1,9 @@
+@import '~lucide-static/font/lucide.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   --background-color: 242, 246, 208;
-  --primary-color: 217, 131, 36;
+  --primary-color: 153, 87, 14;
   --secondary-color: 68, 54, 39;
   --tertiary-color: 239, 220, 171;
   --text-color: 68, 54, 39;
@@ -8,7 +11,7 @@
 
 html,
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   margin: 0;
   padding: 0;
   background-color: rgb(var(--background-color));
@@ -69,8 +72,17 @@ html[data-theme='complex'] {
   h4,
   h5,
   h6 {
-    margin: 0;
+    margin: 0 0 0.5em 0;
     padding: 0;
+  }
+
+  p {
+    margin: 0 0 1em 0;
+    padding: 0;
+
+    &:last-child {
+      margin: 0;
+    }
   }
 
   .layout {
@@ -101,9 +113,9 @@ html[data-theme='complex'] {
   grid-area: header;
   /* Display */
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 0.5em;
+  padding: 0.32rem 1rem;
 
   h1 {
     margin: 0;
@@ -139,7 +151,7 @@ html[data-theme='complex'] {
 }
 
 .layout nav {
-  background-color: rgb(var(--primary-color));
+  background-color: rgb(var(--secondary-color));
   color: #443627;
   /* GRID */
   grid-area: nav;
@@ -161,15 +173,24 @@ html[data-theme='complex'] {
         border-left: none;
       }
 
-      a {
+      button {
+        border: 0 solid transparent;
+        background-color: transparent;
+        width: 100%;
         text-decoration: none;
-        color: #443627;
+        color: white;
         display: block;
         height: 50px;
         line-height: 50px;
         text-align: center;
         font-weight: bold;
+        cursor: pointer;
         position: relative;
+        /* Flex */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5ch;
 
         &:hover {
           /* color: white; */
@@ -188,6 +209,10 @@ html[data-theme='complex'] {
               rgba(0, 0, 0, 0.1)
             );
           }
+        }
+
+        .icon {
+          font-size: 22px;
         }
       }
     }
@@ -228,6 +253,10 @@ html[data-theme='complex'] {
 
       .content {
         padding: 0.7em;
+
+        .description {
+          margin-bottom: 1em;
+        }
       }
 
       img {
@@ -245,11 +274,16 @@ html[data-theme='complex'] {
       }
 
       .actions {
+        display: flex;
+        flex-direction: row;
+        gap: 1em;
+
         &.hidden {
           display: none;
         }
 
         button {
+          width: fit-content;
           background-color: rgb(var(--primary-color));
           color: white;
           border: none;
@@ -257,6 +291,7 @@ html[data-theme='complex'] {
           border-radius: 0.5em;
           cursor: pointer;
           transition: background-color 0.2s;
+          font-weight: bold;
 
           &.edit,
           &.update {
@@ -333,6 +368,17 @@ html[data-theme='complex'] {
 }
 
 form {
+  & > div {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+
+    label p {
+      margin: 0;
+    }
+  }
+
   input[type='text'],
   input[type='email'],
   input[type='number'],
@@ -356,6 +402,8 @@ form {
 
   textarea {
     height: 10rem;
+    /* Deactivate user  */
+    resize: none;
   }
 
   &.edit-form {
@@ -388,6 +436,7 @@ form {
     border-radius: 0.5em;
     cursor: pointer;
     transition: background-color 0.2s;
+    font-weight: bold;
 
     &:hover {
       background-color: rgb(var(--secondary-color));

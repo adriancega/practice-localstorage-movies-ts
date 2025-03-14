@@ -7,6 +7,9 @@
     "module": "es6",
     "target": "es6",
     "allowJs": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "moduleResolution": "node", // Asegura que se resuelvan los módulos correctamente
+    "esModuleInterop": true, // Habilita la interoperabilidad con módulos CommonJS
+    "skipLibCheck": true // Omite la verificación de tipos en las bibliotecas de declaración
   }
 }

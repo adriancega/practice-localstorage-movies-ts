@@ -15,10 +15,17 @@
       <!-- Menú -->
       <nav>
         <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="#">Peliculas</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Contacto</a></li>
+          <li><button href="#">Inicio</button></li>
+          <li>
+            <button class="btn-export">
+              <i class="icon icon-hard-drive-download"></i> Export to JSON
+            </button>
+          </li>
+          <li>
+            <button class="btn-import">
+              <i class="icon icon-hard-drive-upload"></i> Import from JSON
+            </button>
+          </li>
         </ul>
       </nav>
       <!-- Contenido -->
@@ -31,22 +38,28 @@
         <div class="x-search">
           <h3>Buscador</h3>
           <form id="x-search" action="">
-            <label for="search">
-              <p>Busca tu película</p>
+            <div>
+              <label for="search">
+                <p>Busca tu película</p>
+              </label>
               <input type="text" id="search" name="search" />
-            </label>
+            </div>
           </form>
         </div>
         <!-- Añadir película -->
         <div class="x-add">
           <h3>Añadir película</h3>
           <form id="x-add" action="">
-            <label for="title">
-              <p>Título:</p>
+            <div>
+              <label for="title">
+                <p>Título:</p>
+              </label>
               <input type="text" id="title" name="title" />
-            </label>
-            <label for="year">
-              <p>Título:</p>
+            </div>
+            <div>
+              <label for="year">
+                <p>Título:</p>
+              </label>
               <input
                 type="number"
                 min="1900"
@@ -54,11 +67,13 @@
                 id="year"
                 name="year"
               />
-            </label>
-            <label for="description">
-              <p>Descripción:</p>
+            </div>
+            <div>
+              <label for="description">
+                <p>Descripción:</p>
+              </label>
               <textarea id="description" name="description"></textarea>
-            </label>
+            </div>
             <input type="submit" value="Guardar" />
           </form>
         </div>
