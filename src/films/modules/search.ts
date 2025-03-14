@@ -19,12 +19,11 @@ export default function (): void {
 
   const searchEvent = (e: Event) => {
     let filmsStored: Film[] = storage.getData();
-    let filmsViewed: Film[] = list.films;
 
     if (!searchInput) return;
     if (searchInput.value.length === 0) {
       list.updateList(filmsStored);
-      list.show();
+      list.show(true);
       return;
     }
 

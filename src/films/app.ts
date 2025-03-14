@@ -2,6 +2,8 @@ import Add from './modules/add';
 import List from './modules/list';
 import Storage from './modules/storage';
 import Search from './modules/search';
+import Export from './modules/export';
+import Import from './modules/import';
 
 interface IApp {
   add: Add | null;
@@ -36,5 +38,9 @@ export default class App implements IApp {
     this.list.show();
     // Search functionality
     Search();
+    // Export functionality
+    Export();
+    // Import functionality
+    Import();
   }
 }
