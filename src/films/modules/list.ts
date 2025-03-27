@@ -1,10 +1,12 @@
 import { Film } from '../types/types';
 import deleteFn from './delete';
 import editFn from './edit';
+import GlobalContext from '../context/global';
 
 interface IList {
   content: HTMLElement;
   films: any;
+  context: GlobalContext;
   getInstance(): List;
   addToList(film: any): void;
   transformPlainTextToParagraphs(text: string): string;
@@ -24,7 +26,9 @@ export default class List implements IList {
     }
     this.content = document.querySelector('#list-films') as HTMLElement;
     this.films = [];
+    this.context = GlobalContext.instance;
   }
+  context: GlobalContext;
 
   getInstance(): List {
     throw new Error('Method not implemented.');
@@ -50,12 +54,11 @@ export default class List implements IList {
   }
 
   filmTemplate(film: Film): string {
+    const image: string = `<div class="img"></div>`;
     return `
       <article id="film-item-${film.id}" class="item" data-id="${film.id}">
         <div class="content">
-          <img src="https://placehold.co/450x300/999966/FFFFFF/jpg" alt="${
-            film.title
-          }" />
+          ${image}
           <h3>${film.title} <span>(${film.year})</span></h3>
           <div class="description">
             ${this.transformPlainTextToParagraphs(film.description)}
@@ -78,6 +81,22 @@ export default class List implements IList {
     // Reset content if needed
     if (resetContent) {
       this.content.innerHTML = '';
+    }
+
+    if (this.films.length === 0) {
+      if (this.context.searching) {
+        this.content.innerHTML = `
+          <div class="empty">
+            <h2>No se han encontrado resultados</h2>
+            <p>Prueba a buscar otra película</p>
+          </div>
+        `;
+        return;
+      }
+
+      this.content.innerHTML =
+        '<div class="empty-results-label"><p>No se han encontrado peliculas</p></div>';
+      return;
     }
 
     this.films.forEach((film: Film) => this.addToList(film));
